@@ -1,24 +1,29 @@
-# risotto-back
+# Risotto Back : Vue3 App
 
-## Project setup
-```
-yarn install
-```
+This project was bootstrapped with [Create Vue App](https://vuejs.org/guide/quick-start.html).
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Exemple config to run project with Docker
 
-### Compiles and minifies for production
+### Dockerfile
 ```
-yarn build
-```
+FROM node:16-alpine3.16
 
-### Lints and fixes files
-```
-yarn lint
+WORKDIR /app
+COPY package*.json ./
+
+COPY . .
+EXPOSE 8080
+
+CMD ["yarn", "serve"]
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### docker-compose.yml
+```
+risotto_back:
+    build: ./risotto-back/
+    container_name: risotto_back
+    ports:
+        - '8120:8080'
+    volumes:
+        - ./risotto-back:/app
+```
